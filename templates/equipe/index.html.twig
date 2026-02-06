@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join The Battle | Esports Gaming Platform</title>
+  <link rel="stylesheet" href="{{ asset('css/Choix.css') }}">
+</head>
+<body>
+
+  <section class="hero">
+    <h1>JOIN THE BATTLE</h1>
+    <p>Build your Legend<br>or join competitive esports teams and dominate tournaments</p>
+
+    <div class="team-cards">
+      <a href="{{ path('get_equipe') }}" class="team-card">
+        <img src="{{ asset('assets/images/img_0c538dab84ae3d1.png') }}" alt="Join Team">
+        <h2>JOIN TEAM</h2>
+      </a>
+
+      <a href="{{ path('app_equipe_new') }}" class="team-card">
+        <img src="{{ asset('assets/images/img_dd18b0abf67c6f7.png') }}" alt="Create Team">
+        <h2>CREATE TEAM</h2>
+      </a>
+    </div>
+  </section>
+
+</body>
+</html>
