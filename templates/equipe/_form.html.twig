@@ -1,4 +1,26 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+    <div class="mb-3">
+        {{ form_row(form.name, {'label': 'Team Name', 'attr': {'class': 'form-control', 'placeholder': 'Enter team name'}}) }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" style="color:#d1d5db;font-weight:600;margin-bottom:10px;display:block">Add Members</label>
+        {{ form_widget(form.members, {'attr': {'class': 'form-select', 'style': 'background:#1f2933;border:1px solid #374151;color:#e5e7eb;padding:12px;border-radius:8px;min-height:150px'}}) }}
+        <small style="color:#9ca3af">Hold Ctrl/Cmd to select multiple members</small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" style="color:#d1d5db;font-weight:600;margin-bottom:10px;display:block">Join Tournaments</label>
+        {{ form_widget(form.tournaments, {'attr': {'class': 'form-select', 'style': 'background:#1f2933;border:1px solid #374151;color:#e5e7eb;padding:12px;border-radius:8px;min-height:150px'}}) }}
+        <small style="color:#9ca3af">Hold Ctrl/Cmd to select multiple tournaments</small>
+    </div>
+
+    <div class="form-actions" style="display:flex;gap:12px;justify-content:center;margin-top:25px;padding-top:25px;border-top:1px solid #374151">
+        <button type="submit" class="btn btn-primary" style="background:linear-gradient(135deg,#22c55e,#16a34a);color:white;padding:12px 24px;border-radius:10px;font-weight:600;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px">
+            <i class="fas fa-save"></i> {{ button_label|default('Save') }}
+        </button>
+        <a href="{{ path('app_equipe_index') }}" class="btn btn-secondary" style="background:#374151;color:#e5e7eb;padding:12px 24px;border-radius:10px;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px">
+            <i class="fas fa-times"></i> Cancel
+        </a>
+    </div>
 {{ form_end(form) }}

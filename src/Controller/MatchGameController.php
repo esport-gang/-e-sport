@@ -30,10 +30,17 @@ final class MatchGameController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // تأكد match مربوط بتورنو
+            if (!$matchGame->getTournament()) {
+                $this->addFlash('error', 'Match doit appartenir à un tournoi');
+                return $this->redirectToRoute('app_match_game_new');
+            }
+
             $entityManager->persist($matchGame);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_match_game_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_match_game_index');
         }
 
         return $this->render('match_game/new.html.twig', [
@@ -57,9 +64,17 @@ final class MatchGameController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (!$matchGame->getTournament()) {
+                $this->addFlash('error', 'Match doit appartenir à un tournoi');
+                return $this->redirectToRoute('app_match_game_edit', [
+                    'id' => $matchGame->getId()
+                ]);
+            }
+
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_match_game_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_match_game_index');
         }
 
         return $this->render('match_game/edit.html.twig', [
@@ -71,11 +86,11 @@ final class MatchGameController extends AbstractController
     #[Route('/{id}', name: 'app_match_game_delete', methods: ['POST'])]
     public function delete(Request $request, MatchGame $matchGame, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$matchGame->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$matchGame->getId(), $request->request->get('_token'))) {
             $entityManager->remove($matchGame);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_match_game_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_match_game_index');
     }
 }

@@ -1,0 +1,18 @@
+<div class="team-card">
+    <div class="team-header">
+        <span class="team-id">#{{ equipe.id }}</span>
+    </div>
+
+    <h2 class="team-name">{{ equipe.name }}</h2>
+
+    <div class="team-actions">
+        <button class="btn btn-view" onclick="openModal({{ equipe.id }})">
+            View
+        </button>
+
+        <a href="{{ path('app_equipe_join', {id: equipe.id}) }}"
+           class="btn btn-join">
+            Join Team
+        </a>
+    </div>
+</div>
